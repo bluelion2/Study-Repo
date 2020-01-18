@@ -1,13 +1,27 @@
+// @ts-nocheck
 import React from "react";
 import styled from "styled-components";
 
-const TodoList = () => (
-  <ListBox>
-    <ListItem>Todo 1</ListItem>
-    <ListItem>Todo 2</ListItem>
-    <ListItem>Todo 3</ListItem>
-  </ListBox>
-);
+const TodoList = () => {
+  const todos = [
+    { id: 1, content: "html", complete: false },
+    { id: 2, content: "css", complete: true },
+    { id: 3, content: "JS", complete: false }
+  ];
+  return (
+    <ListBox>
+      {todos.map(todo => (
+        <ListItem
+          onClick={() => console.log("click", todo.id)}
+          key={todo.id}
+          complete={todo.complete ? "none" : "line-through"}
+        >
+          {todo.id} | {todo.content}
+        </ListItem>
+      ))}
+    </ListBox>
+  );
+};
 
 const ListBox = styled.ul`
   list-style: none;
@@ -24,6 +38,7 @@ const ListItem = styled.li`
   height: 20px;
   border-radius: 5px;
   margin: 20px 0;
+  text-decoration: ${props => props?.complete};
 `;
 
 export default TodoList;

@@ -22,11 +22,21 @@ const ListItem = styled.li`
   margin: 20px 0;
 `;
 
+const LineItem = styled.li`
+  list-style: none;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  height: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+  text-decoration: line-through;
+`;
+
 export const List = () => (
   <ListBox>
     <ListItem>Todo 1</ListItem>
     <ListItem>Todo 2</ListItem>
-    <ListItem>Todo 3</ListItem>
+    <LineItem>Todo 3</LineItem>
   </ListBox>
 );
 
