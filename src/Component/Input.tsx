@@ -12,8 +12,16 @@ const InputContainer = ({ insertText, text, createTodo }) => {
   return (
     <InputBox>
       <Title>Insert!</Title>
-      <TextInputStyle type="text" value={text} onChange={handleChange} />
-      <ClickButton onClick={() => createTodo()}>Add</ClickButton>
+      <TextInputStyle
+        className="input"
+        type="text"
+        value={text}
+        onChange={handleChange}
+        placeholder="Insert Todo"
+      />
+      <ClickButton className="add" onClick={() => createTodo()}>
+        Add
+      </ClickButton>
     </InputBox>
   );
 };

@@ -7,7 +7,7 @@ import { ClickButton } from "./Input";
 
 const TodoList = ({ todos, changeTodo, deleteTodo }) => {
   return (
-    <ListBox>
+    <ListBox className="todo-list">
       {todos.map(todo => (
         <ListItem
           key={todo.id}
@@ -15,10 +15,10 @@ const TodoList = ({ todos, changeTodo, deleteTodo }) => {
         >
           {todo.id} | {todo.content}
           <div>
-            <ClickButton onClick={() => changeTodo(todo.id)}>
+            <ClickButton className="change" onClick={() => changeTodo(todo.id)}>
               {todo.complete ? "Complete" : "Back"}
             </ClickButton>
-            <ClickButton onClick={() => deleteTodo(todo.id)}>
+            <ClickButton className="delete" onClick={() => deleteTodo(todo.id)}>
               Delete
             </ClickButton>
           </div>
