@@ -36,7 +36,7 @@ const InputBox = styled.div`
   height: 40px;
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   width: 110px;
   margin-right: 10px;
   text-align: center;
