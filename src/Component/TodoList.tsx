@@ -1,27 +1,43 @@
 // @ts-nocheck
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { changeTodo, deleteTodo } from "../Store/types";
+import { ClickButton } from "./Input";
 
-const TodoList = () => {
-  const todos = [
-    { id: 1, content: "html", complete: false },
-    { id: 2, content: "css", complete: true },
-    { id: 3, content: "JS", complete: false }
-  ];
+const TodoList = ({ todos, changeTodo, deleteTodo }) => {
   return (
     <ListBox>
       {todos.map(todo => (
         <ListItem
-          onClick={() => console.log("click", todo.id)}
           key={todo.id}
           complete={todo.complete ? "none" : "line-through"}
         >
           {todo.id} | {todo.content}
+          <div>
+            <ClickButton onClick={() => changeTodo(todo.id)}>
+              {todo.complete ? "Complete" : "Back"}
+            </ClickButton>
+            <ClickButton onClick={() => deleteTodo(todo.id)}>
+              Delete
+            </ClickButton>
+          </div>
         </ListItem>
       ))}
     </ListBox>
   );
 };
+
+const mapToStateProps = state => ({
+  todos: state.createTodoStore.todos
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeTodo: id => dispatch(changeTodo(id)),
+  deleteTodo: id => dispatch(deleteTodo(id))
+});
+
+export default connect(mapToStateProps, mapDispatchToProps)(TodoList);
 
 const ListBox = styled.ul`
   list-style: none;
@@ -39,6 +55,9 @@ const ListItem = styled.li`
   border-radius: 5px;
   margin: 20px 0;
   text-decoration: ${props => props?.complete};
+  display: flex;
+  justify-content: space-between;
+  button {
+    margin-right: 10px;
+  }
 `;
-
-export default TodoList;

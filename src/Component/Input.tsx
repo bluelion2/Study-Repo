@@ -1,15 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { insertText, createTodo } from "../Store/types";
 
-const InputContainer = () => (
-  <InputBox>
-    <Title>Insert!</Title>
-    <TextInputStyle type="text" />
-    <ClickButton>Add</ClickButton>
-  </InputBox>
-);
+const InputContainer = ({ insertText, text, createTodo }) => {
+  const handleChange = event => {
+    const text = event.target.value;
+    if (!text) return;
+    insertText(text);
+  };
+  return (
+    <InputBox>
+      <Title>Insert!</Title>
+      <TextInputStyle type="text" value={text} onChange={handleChange} />
+      <ClickButton onClick={() => createTodo()}>Add</ClickButton>
+    </InputBox>
+  );
+};
 
-export default InputContainer;
+const mapToStateProps = state => ({
+  text: state.createTodoStore.text
+});
+
+const mapDispatchToProps = dispatch => ({
+  insertText: text => dispatch(insertText(text)),
+  createTodo: () => dispatch(createTodo())
+});
+
+export default connect(mapToStateProps, mapDispatchToProps)(InputContainer);
 
 const InputBox = styled.div`
   display: flex;
@@ -33,7 +51,7 @@ const TextInputStyle = styled.input`
   margin-right: 30px;
 `;
 
-const ClickButton = styled.button`
+export const ClickButton = styled.button`
   background-color: white;
   border-radius: 5px;
   font-size: 16px;
