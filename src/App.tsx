@@ -1,18 +1,15 @@
 import React from "react";
-import "./App.css";
-import Container from "./Container/Container";
+import "./App.scss";
 import Header from "./Component/Header";
 import InputContainer from "./Component/Input";
 import TodoList from "./Component/TodoList";
 
-const App: React.FC = () => {
-  return (
-    <Container>
-      <Header />
-      <InputContainer />
-      <TodoList />
-    </Container>
-  );
-};
+const App: React.FC = () => (
+  <>
+    <Header />
+    <InputContainer />
+    <TodoList />
+  </>
+);
 
 export default App;
