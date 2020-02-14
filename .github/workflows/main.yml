@@ -1,9 +1,9 @@
-name:'Practice actions'
-on:[push]
+name: 'Practice actions'
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -name: Run a one-line script
-        run: echo testing..
+      - name: echo hello
+        run: echo "hello world"
