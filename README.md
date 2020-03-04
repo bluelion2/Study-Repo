@@ -15,3 +15,5 @@
   - [Todo Design](https://www.figma.com/file/5gJixBxHwnoPEagnBMVqbt/Test-Todo?node-id=0%3A1)
 - Storybook을 이용해서 컴포넌트를 만들고, 구현하였습니다.
   - styled Component
+
+[참고 링크 : BookUs Project](https://github.com/connect-foundation/2019-12)
