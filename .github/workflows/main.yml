@@ -1,19 +1,22 @@
-name: 'Practice actions'
+name: "Practice actions"
 on:
   push:
     branches:
       - master
 
   pull_request:
-    branches: 
+    branches:
       - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: echo hello
+      - name: echo hello world
         run: echo "hello world"
       - name: Run a one-line script
         run: echo testing...
-        
+      - name: npm install
+        run: npm install
+      - name: cypress test
+        run: npm run test:cypress
