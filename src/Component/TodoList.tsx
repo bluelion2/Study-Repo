@@ -41,6 +41,7 @@ export default connect(mapToStateProps, mapDispatchToProps)(TodoList);
 
 const ListBox = styled.ul`
   list-style: none;
+  margin: auto;
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 40px 20px;
