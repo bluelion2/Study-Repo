@@ -1,13 +1,17 @@
-// @ts-nocheck
 import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { changeTodo, deleteTodo } from "../Store/types";
 import { ClickButton } from "./Input";
+import { Todo } from "../Store/types";
 
-const TodoList = ({ todos, changeTodo, deleteTodo }) => {
+type Props = {
+  todos: Todo[];
+  onChange: (id: number) => void;
+  onDelete: (id: number) => void;
+};
+
+const TodoList = ({ todos, onChange, onDelete }: Props) => {
   return (
-    <ListBox className="todo-list">
+    <ListBox>
       {todos.map(todo => (
         <ListItem
           key={todo.id}
@@ -15,10 +19,10 @@ const TodoList = ({ todos, changeTodo, deleteTodo }) => {
         >
           {todo.id} | {todo.content}
           <div>
-            <ClickButton className="change" onClick={() => changeTodo(todo.id)}>
+            <ClickButton className="change" onClick={() => onChange(todo.id)}>
               {todo.complete ? "Complete" : "Back"}
             </ClickButton>
-            <ClickButton className="delete" onClick={() => deleteTodo(todo.id)}>
+            <ClickButton className="delete" onClick={() => onDelete(todo.id)}>
               Delete
             </ClickButton>
           </div>
@@ -28,16 +32,7 @@ const TodoList = ({ todos, changeTodo, deleteTodo }) => {
   );
 };
 
-const mapToStateProps = state => ({
-  todos: state.createTodoStore.todos
-});
-
-const mapDispatchToProps = dispatch => ({
-  changeTodo: id => dispatch(changeTodo(id)),
-  deleteTodo: id => dispatch(deleteTodo(id))
-});
-
-export default connect(mapToStateProps, mapDispatchToProps)(TodoList);
+export default TodoList;
 
 const ListBox = styled.ul`
   list-style: none;
@@ -55,7 +50,7 @@ const ListItem = styled.li`
   height: 20px;
   border-radius: 5px;
   margin: 20px 0;
-  text-decoration: ${props => props?.complete};
+  text-decoration: ${({ complete }: { complete: string }) => complete};
   display: flex;
   justify-content: space-between;
   button {

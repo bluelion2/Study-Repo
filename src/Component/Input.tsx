@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { insertText, createTodo } from "../Store/types";
 
-const InputContainer = ({ insertText, text, createTodo }) => {
-  const handleChange = event => {
+type Props = {
+  onInsert: (text: string) => void;
+  text: string;
+  onCreate: () => void;
+};
+
+const InputContainer = ({ onInsert, text, onCreate }: Props) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
     if (!text) return;
-    insertText(text);
+    onInsert(text);
   };
   return (
     <InputBox>
@@ -19,23 +23,14 @@ const InputContainer = ({ insertText, text, createTodo }) => {
         onChange={handleChange}
         placeholder="Insert Todo"
       />
-      <ClickButton className="add" onClick={() => createTodo()}>
+      <ClickButton className="add" onClick={() => onCreate()}>
         Add
       </ClickButton>
     </InputBox>
   );
 };
 
-const mapToStateProps = state => ({
-  text: state.createTodoStore.text
-});
-
-const mapDispatchToProps = dispatch => ({
-  insertText: text => dispatch(insertText(text)),
-  createTodo: () => dispatch(createTodo())
-});
-
-export default connect(mapToStateProps, mapDispatchToProps)(InputContainer);
+export default InputContainer;
 
 const InputBox = styled.div`
   display: flex;
