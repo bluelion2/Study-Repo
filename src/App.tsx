@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.scss";
 import Header from "./Component/Header";
 import InputContainer from "./Component/Input";
@@ -9,14 +9,27 @@ import {
   changeTodo,
   deleteTodo,
   insertText,
-  createTodo
+  createTodo,
+  initTodo
 } from "./Store/Store";
+import { getData } from "./apis";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const { todos, text } = useSelector(
     (state: RootState) => state.createTodoStore
   );
+
+  const axiosGetTodos = async () => {
+    const {
+      data: { todos }
+    } = await getData();
+    dispatch(initTodo(todos));
+  };
+
+  useEffect(() => {
+    axiosGetTodos();
+  }, []);
 
   const onChange = (id: number) => {
     dispatch(changeTodo(id));

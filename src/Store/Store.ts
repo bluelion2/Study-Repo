@@ -4,7 +4,9 @@ import {
   CHANGE_TODO,
   INSERT_TEXT,
   TodoAction,
-  TDefaultState
+  TDefaultState,
+  Todo,
+  INIT_TODO
 } from "./types";
 import { combineReducers } from "redux";
 
@@ -12,13 +14,10 @@ export const createTodo = () => ({ type: CREATE_TODO });
 export const changeTodo = (id: number) => ({ type: CHANGE_TODO, id });
 export const deleteTodo = (id: number) => ({ type: DELETE_TODO, id });
 export const insertText = (text: string) => ({ type: INSERT_TEXT, text });
+export const initTodo = (todos: Todo[]) => ({ type: INIT_TODO, todos });
 
 const DefaultState: TDefaultState = {
-  todos: [
-    { id: 1, content: "HTML", complete: false },
-    { id: 2, content: "CSS", complete: true },
-    { id: 3, content: "JS", complete: false }
-  ],
+  todos: [],
   text: ""
 };
 
@@ -27,6 +26,11 @@ const createTodoStore = (
   action: TodoAction
 ) => {
   switch (action.type) {
+    case INIT_TODO:
+      return {
+        ...state,
+        todos: action.todos
+      };
     case INSERT_TEXT:
       return {
         ...state,
