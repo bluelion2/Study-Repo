@@ -29,6 +29,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     axiosGetTodos();
+    const a = insertText("test");
+    const b = createTodo();
+    console.log("a", b);
   }, []);
 
   const onChange = (id: number) => {
