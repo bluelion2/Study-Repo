@@ -16,7 +16,7 @@ export const deleteTodo = (id: number) => ({ type: DELETE_TODO, id });
 export const insertText = (text: string) => ({ type: INSERT_TEXT, text });
 export const initTodo = (todos: Todo[]) => ({ type: INIT_TODO, todos });
 
-const DefaultState: TDefaultState = {
+export const DefaultState: TDefaultState = {
   todos: [],
   text: ""
 };
