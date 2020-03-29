@@ -11,7 +11,7 @@ type Props = {
 
 const TodoList = ({ todos, onChange, onDelete }: Props) => {
   return (
-    <ListBox>
+    <ListBox className="todo-list">
       {todos.map(todo => (
         <ListItem
           key={todo.id}

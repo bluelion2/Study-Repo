@@ -1,5 +1,6 @@
 import axios from "axios";
 import { OK } from "http-status";
+import { getData } from "../apis";
 
 jest.mock("axios");
 
@@ -9,16 +10,20 @@ const initTodos = [
   { id: 3, content: "JS", complete: false }
 ];
 
-describe("api test", () => {
-  //TODO
-  // axios 요청시 undefined값을 가지고 옴
+const url = "/data/todo.json";
 
-  // let data;
-  // beforeEach(async () => {
-  //   data = await axios.get("http://localhost:3000/data/todo.json");
-  //   console.log("before", data);
-  // });
-  it("get test", async () => {
-    expect(true).toEqual(true);
+describe("api test", () => {
+  it("기본 테스트", async () => {
+    const result = {
+      data: {
+        todos: initTodos
+      }
+    };
+    axios.get.mockResolvedValue(result);
+    return getData().then(data => {
+      expect(data).toEqual(result);
+    });
   });
+
+  it("axios test", () => {});
 });
