@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./App.scss";
 import Header from "./Component/Header";
 import InputContainer from "./Component/Input";
 import TodoList from "./Component/TodoList";
